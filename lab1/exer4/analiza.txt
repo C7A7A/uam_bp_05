@@ -1,0 +1,10 @@
+Bajty dla przykładowych typów danych w C:
+char - 1
+short - 2
+int - 4
+long - 8
+long long - 8
+float - 4
+double - 8
+long double - 16
+unsigned long long - 8
