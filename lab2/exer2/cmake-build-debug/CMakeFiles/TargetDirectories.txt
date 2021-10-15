@@ -1,0 +1,3 @@
+/home/students/s452648/Desktop/BP/lab2/exer2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/students/s452648/Desktop/BP/lab2/exer2/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/students/s452648/Desktop/BP/lab2/exer2/cmake-build-debug/CMakeFiles/exer2.dir

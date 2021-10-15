@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/exer2.dir/main.cpp.o -o exer2 
