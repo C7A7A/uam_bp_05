@@ -1,0 +1,11 @@
+Mateusz Czajka 452648
+
+exer1.s, exer3.s - pliki wynikowe w Assemblerze programu z zadania 1 z labolatoriów 1 (exer1.s) oraz programu z wywołaniem pustej funkcji (exer3.s)
+
+exer2.s - plik wynikowy w Assemblerze programu z zadeklarowanymi 3 zmiennymi i returnem + opis kodu Assemblera
+exer2.cpp - plik źródłowy w C++
+
+exer4.cpp - plik źródłowy z poprawionym kodem (jak sugerował Valgrind)
+
+exer5.txt - błędy i ostrzeżenia jakie udało mi się znaleźć po  analizie kodów z użyciem Valgrinda
+ 

@@ -1,0 +1,4 @@
+Przetesotwałem kod kolegi, na początku próbowałem przepełnić bufor wpisując długie słowo do 
+wyszukania w pliku. Zauważyłem jedynie, że przy wpisaniu odpowiednio długiego stringa program nie
+wykonuje się (nie szuka stringa w pliku). Następnie spróbowałem przepełnić bufor tworząc plik wypełniony
+długimi stringami. Nie dało to żadnego efektu.

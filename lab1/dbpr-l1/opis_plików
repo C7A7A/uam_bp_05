@@ -1,0 +1,12 @@
+ Mateusz Czajka
+ 452648
+ 
+ exercise_1.c, exercise_2.cpp, exercise_5.py - programy wczytujące dane z pliku i wyszukujące linie zawierające podane słowo w C, C++ i Pythonie
+ 
+ exercise_3.txt - krótki opis w jaki sposób próbowałem przepełnić bufor w programie kolegi
+ 
+ exercise_4.txt - analiza 
+ 1. ile bajtów zajmują przykładowe typy danych w C
+ 2. co się stanie po zmianie typu danych tablic
+ 3. co się stanie po zmianie rozmiaru pierwszej tablicy
+ 4. opcji kompilatora (-00, -03)

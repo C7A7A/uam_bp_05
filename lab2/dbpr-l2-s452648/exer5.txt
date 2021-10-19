@@ -1,0 +1,89 @@
+ Problemy wykryte w różnych programach:
+ 
+1. redefinicja "_GNU_SOURCE" (jest zdefiniowany domyślnie), ostrzeżenie o konwertowaniu stałej stringowej do char*, brak returna w funkcji, która nie jest typu void
+main.c:1: warning: "_GNU_SOURCE" redefined
+    1 | #define _GNU_SOURCE
+      | 
+<command-line>: note: this is the location of the previous definition
+main.c: In function 'int builtInCommand(char*)':
+main.c:195:9: warning: ISO C++ forbids converting a string constant to 'char*' [-Wwrite-strings]
+  195 |         "cd",
+      |         ^~~~
+main.c:196:9: warning: ISO C++ forbids converting a string constant to 'char*' [-Wwrite-strings]
+  196 |         "help",
+      |         ^~~~~~
+main.c:197:9: warning: ISO C++ forbids converting a string constant to 'char*' [-Wwrite-strings]
+  197 |         "exit",
+      |         ^~~~~~
+main.c:198:9: warning: ISO C++ forbids converting a string constant to 'char*' [-Wwrite-strings]
+  198 |         "history"
+      |         ^~~~~~~~~
+main.c: In function 'int executeCommand(char**)':
+main.c:189:1: warning: control reaches end of non-void function [-Wreturn-type]
+  189 | }
+
+
+2. Brakująca biblioteka
+main.c: In function 'int main(int, char**)':
+main.c:26:20: error: 'strcmp' was not declared in this scope
+   26 |                 if(strcmp(A[i], "int") == 0){
+      |                    ^~~~~~
+main.c:3:1: note: 'strcmp' is defined in header '<cstring>'; did you forget to '#include <cstring>'?
+    2 | #include <stdlib.h>
+  +++ |+#include <cstring>
+    3 | 
+
+3. Błąd w pisowni
+stack.h:1:14: warning: extra tokens at end of #ifndef directive
+    1 | #ifndef STACK.H
+      |              ^
+stack.h:2:9: warning: ISO C++11 requires whitespace after the macro name
+    2 | #define STACK.H
+      |         ^
+      
+4. Brakująca biblioteka
+write.c: In function 'void writeStack(Stack)':
+write.c:6:17: error: 'printf' was not declared in this scope
+    6 |                 printf("%d ", S.data[i]);
+      |                 ^~~~~~
+write.c:2:1: note: 'printf' is defined in header '<cstdio>'; did you forget to '#include <cstdio>'?
+    1 | #include "write.h"
+  +++ |+#include <cstdio>
+    2 | #include "stack.h"
+write.c:8:9: error: 'printf' was not declared in this scope
+    8 |         printf("\n");
+      |         ^~~~~~
+write.c:8:9: note: 'printf' is defined in header '<cstdio>'; did you forget to '#include <cstdio>'?
+write.c: In function 'void writeStackEmpty(Stack)':
+write.c:13:17: error: 'printf' was not declared in this scope
+   13 |                 printf("true\n");
+      |                 ^~~~~~
+write.c:13:17: note: 'printf' is defined in header '<cstdio>'; did you forget to '#include <cstdio>'?
+write.c:15:17: error: 'printf' was not declared in this scope
+   15 |                 printf("false\n");
+      |                 ^~~~~~
+write.c:15:17: note: 'printf' is defined in header '<cstdio>'; did you forget to '#include <cstdio>'?
+
+5. Błąd w pisowni, niepotrzebny ;, include pliku, który nie istnieje
+queue.h:1:14: warning: extra tokens at end of #ifndef directive
+    1 | #ifndef QUEUE.H
+      |              ^
+queue.h:2:9: warning: ISO C++11 requires whitespace after the macro name
+    2 | #define QUEUE.H
+      |         ^~~~~
+queue.h:3:21: warning: extra tokens at end of #include directive
+    3 | #include <stdbool.h>;
+      |                     ^
+In file included from main.c:2:
+write.h:1:14: warning: extra tokens at end of #ifndef directive
+    1 | #ifndef WRITE.H
+      |              ^
+write.h:2:9: warning: ISO C++11 requires whitespace after the macro name
+    2 | #define WRITE.H
+      |         ^~~~~
+write.h:4:10: fatal error: stack.h: No such file or directory
+    4 | #include "stack.h"
+      |   
+      
+      
+Kolejne błędy lub ostrzeżenia, które widziałem były bardzo podobne do tych powyżej. Najczęściej valgrind ostrzegał mnie o brakującej bibliotece lub błędach w pisowni (np. QUEUE.H zamiast QUEUE_H).
