@@ -1,0 +1,78 @@
+==105840== Helgrind, a thread error detector
+==105840== Copyright (C) 2007-2017, and GNU GPL'd, by OpenWorks LLP et al.
+==105840== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==105840== Command: ./main_2
+==105840== 
+==105840== ---Thread-Announcement------------------------------------------
+==105840== 
+==105840== Thread #3 was created
+==105840==    at 0x49C4282: clone (clone.S:71)
+==105840==    by 0x48872EB: create_thread (createthread.c:101)
+==105840==    by 0x4888E0F: pthread_create@@GLIBC_2.2.5 (pthread_create.c:817)
+==105840==    by 0x4842917: ??? (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_helgrind-amd64-linux.so)
+==105840==    by 0x10926C: main (in /home/students/s452648/Desktop/BP/lab4/exer3/main_2)
+==105840== 
+==105840== ---Thread-Announcement------------------------------------------
+==105840== 
+==105840== Thread #2 was created
+==105840==    at 0x49C4282: clone (clone.S:71)
+==105840==    by 0x48872EB: create_thread (createthread.c:101)
+==105840==    by 0x4888E0F: pthread_create@@GLIBC_2.2.5 (pthread_create.c:817)
+==105840==    by 0x4842917: ??? (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_helgrind-amd64-linux.so)
+==105840==    by 0x10926C: main (in /home/students/s452648/Desktop/BP/lab4/exer3/main_2)
+==105840== 
+==105840== ----------------------------------------------------------------
+==105840== 
+==105840==  Lock at 0x10C040 was first observed
+==105840==    at 0x483FEDF: ??? (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_helgrind-amd64-linux.so)
+==105840==    by 0x1091F3: increment(void*) (in /home/students/s452648/Desktop/BP/lab4/exer3/main_2)
+==105840==    by 0x4842B1A: ??? (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_helgrind-amd64-linux.so)
+==105840==    by 0x4888608: start_thread (pthread_create.c:477)
+==105840==    by 0x49C4292: clone (clone.S:95)
+==105840==  Address 0x10c040 is 0 bytes inside data symbol "mut"
+==105840== 
+==105840== Possible data race during read of size 8 at 0x10C068 by thread #3
+==105840== Locks held: none
+==105840==    at 0x1091D9: increment(void*) (in /home/students/s452648/Desktop/BP/lab4/exer3/main_2)
+==105840==    by 0x4842B1A: ??? (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_helgrind-amd64-linux.so)
+==105840==    by 0x4888608: start_thread (pthread_create.c:477)
+==105840==    by 0x49C4292: clone (clone.S:95)
+==105840== 
+==105840== This conflicts with a previous write of size 8 by thread #2
+==105840== Locks held: 1, at address 0x10C040
+==105840==    at 0x1091FF: increment(void*) (in /home/students/s452648/Desktop/BP/lab4/exer3/main_2)
+==105840==    by 0x4842B1A: ??? (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_helgrind-amd64-linux.so)
+==105840==    by 0x4888608: start_thread (pthread_create.c:477)
+==105840==    by 0x49C4292: clone (clone.S:95)
+==105840==  Address 0x10c068 is 0 bytes inside data symbol "var"
+==105840== 
+==105840== ----------------------------------------------------------------
+==105840== 
+==105840==  Lock at 0x10C040 was first observed
+==105840==    at 0x483FEDF: ??? (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_helgrind-amd64-linux.so)
+==105840==    by 0x1091F3: increment(void*) (in /home/students/s452648/Desktop/BP/lab4/exer3/main_2)
+==105840==    by 0x4842B1A: ??? (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_helgrind-amd64-linux.so)
+==105840==    by 0x4888608: start_thread (pthread_create.c:477)
+==105840==    by 0x49C4292: clone (clone.S:95)
+==105840==  Address 0x10c040 is 0 bytes inside data symbol "mut"
+==105840== 
+==105840== Possible data race during write of size 8 at 0x10C068 by thread #2
+==105840== Locks held: 1, at address 0x10C040
+==105840==    at 0x1091FF: increment(void*) (in /home/students/s452648/Desktop/BP/lab4/exer3/main_2)
+==105840==    by 0x4842B1A: ??? (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_helgrind-amd64-linux.so)
+==105840==    by 0x4888608: start_thread (pthread_create.c:477)
+==105840==    by 0x49C4292: clone (clone.S:95)
+==105840== 
+==105840== This conflicts with a previous read of size 8 by thread #3
+==105840== Locks held: none
+==105840==    at 0x1091D9: increment(void*) (in /home/students/s452648/Desktop/BP/lab4/exer3/main_2)
+==105840==    by 0x4842B1A: ??? (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_helgrind-amd64-linux.so)
+==105840==    by 0x4888608: start_thread (pthread_create.c:477)
+==105840==    by 0x49C4292: clone (clone.S:95)
+==105840==  Address 0x10c068 is 0 bytes inside data symbol "var"
+==105840== 
+==105840== 
+==105840== Use --history-level=approx or =none to gain increased speed, at
+==105840== the cost of reduced accuracy of conflicting-access information
+==105840== For lists of detected and suppressed errors, rerun with: -s
+==105840== ERROR SUMMARY: 9157990 errors from 2 contexts (suppressed: 29163718 from 7)
