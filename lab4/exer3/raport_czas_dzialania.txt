@@ -1,0 +1,14 @@
+--- wersja bez blokad ---
+real    0m0.032s
+user    0m0.087s
+sys     0m0.000s
+
+--- wersja z blokadami ---
+real    0m0.777s
+user    0m1.235s
+sys     0m1.068s
+
+--- wersja w jednym wątku ---
+real    0m0.022s
+user    0m0.022s
+sys     0m0.000s

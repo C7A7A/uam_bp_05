@@ -1,0 +1,3 @@
+Jak ochronić się przed tego typem ataku?
+Napisać program, który dla każdego zapytania danego typu odpowiada w tym samym czasie
+(sztuczne wydłużanie czasu do najgorszego przypadku)

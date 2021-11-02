@@ -1,0 +1,27 @@
+1. RSA 
+źródło: https://www.cs.sjsu.edu/faculty/stamp/students/article.html
+data wykrycia: w 1996 Kocher zaprezentował wyniki swoich doświadczeń polegające na zastosowaniu "timing attack" na algorytm RSA.
+
+2. OpenSSL
+źródło: https://crypto.stanford.edu/~dabo/papers/ssl-timing.pdf
+data wykrycia: raport z 2003
+
+3. Meltdown i Spectre
+źródła:
+- https://spectreattack.com/
+- https://arxiv.org/abs/1801.01207 (Meltdown)
+- https://arxiv.org/abs/1801.01203 (Spectre)
+data wykrycia: 2017
+
+4. The Clock is Still Ticking: Timing Attacks in the Modern Web
+Ataki na Facebooka, Twittera, LinkedIna, Googla i Amazona
+żródło: https://www.semanticscholar.org/paper/The-Clock-is-Still-Ticking%3A-Timing-Attacks-in-the-Goethem-Joosen/b8a29b3c2a13419ebbd05d1fa42e10db090fb21f
+data wykrycia: praca opublikowana w 2015
+
+5. Zgadywanie haseł - Tenex
+źródło: https://www.sjoerdlangkemper.nl/2016/11/01/tenex-password-bug/
+data wykrycia: 1974
+
+najbardziej narażone:
+- wersje Unixa, które używają funkcji crypt do hashowania haseł. Na starszym sprzęcie użycie funkcji zajmowało wiele czasu. Program do logowania użytkownika używał crypt tylko kiedy login istniał w systemie. W ten sposób można było sprawdzić jakie loginy istnieją w systemie.
+- celem timing attacks są najczęściej inteligentne karty (karty z chipami) oraz serwery webowe, którze korzystają z OpenSSL

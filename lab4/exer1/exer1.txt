@@ -1,0 +1,8 @@
+Jak system(Unix) sprawdza dane logowania teraz:
+1. system czyta dane wprowadzone przez użytkownika (login i hasło).
+2. system porównuje login do danych w pliku /etc/passwd. Jeśli dane się zgadzają przechodzi do kroku 3.
+3. program "login" hashuje wpisane przez użytkownika hasło i porównuje je do skorelowanego z loginem, 
+shashowanego hasła w pliku /etc/passwd.
+4. Jeśli dane się zgadzają system loguje użytkownika.
+
+różnica w czasie działania dla nowszych systemów:

@@ -1,0 +1,41 @@
+Zadanie 1
+w folderze exer1 znajdują się 3 pliki dla każdego ćwiczenia (program napisany w c, program skompilowany do Assemblera, program wynikowy). Wszystkie programy uruchamiają się i działają tak jak zostało to opisane na stronie. Wyjątkiem jest zadanie 8, które pomimo wprowadzenia zmian sugerowanych przez autora wyrzuca błąd, jest to chyba spowodowane tym, że programy zostały napisane w systemie 32-bitowym.
+
+Zadanie 2
+exer2.cpp - program z metodami przekazywania argumentów do funkcji w C++
+exer2.s - program z metodami przekazywania argumentów do funkcji w Assemblerze (może coś źle zrobiłem, ale w Assemblerze 3 metody przekazywania argumentów do funkcji (wartość, wskaźnik, referencja) wyglądają tak samo.
+
+Zadanie 3
+exer3.cpp - program mnożący macierze 100x100 bez wycieków pamięci :D.
+
+miss rate:
+I1 -  0.00% 
+LLi - 0.00% 
+D1  - 0.5%  
+LLd - 0.1%  
+LL  - 0.0%  
+
+pełne wyniki:
+==287152== I   refs:      61,803,579
+==287152== I1  misses:         1,635
+==287152== LLi misses:         1,580
+==287152== I1  miss rate:       0.00%
+==287152== LLi miss rate:       0.00%
+==287152== 
+==287152== D   refs:      17,710,162  (16,249,909 rd   + 1,460,253 wr)
+==287152== D1  misses:        87,445  (    82,819 rd   +     4,626 wr)
+==287152== LLd misses:        12,478  (     8,977 rd   +     3,501 wr)
+==287152== D1  miss rate:        0.5% (       0.5%     +       0.3%  )
+==287152== LLd miss rate:        0.1% (       0.1%     +       0.2%  )
+==287152== 
+==287152== LL refs:           89,080  (    84,454 rd   +     4,626 wr)
+==287152== LL misses:         14,058  (    10,557 rd   +     3,501 wr)
+==287152== LL miss rate:         0.0% (       0.0%     +       0.2%  )
+
+Nie do końca zrozumiałem w jaki sposób mam zmienić kolejność pętli w programie. Kiedy zmieniałem pętle w funkcji mnożącej macierze (np. pierwsza pętla <-> trzecia pętla) miss rate pozostawał taki sam.
+
+Zadanie 4
+exer4.cpp - program z wyciekami pamięci napisany w c++ + zaznaczone miejsca wycieku pamięci + opis poprawnego kodu
+
+Zadanie 5
+Próbowałem napisać 2 programy, które oszukują Valgrinda, ale w obu przypadkach wykrył wycieki pamięci.
