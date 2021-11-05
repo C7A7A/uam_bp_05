@@ -1,0 +1,9 @@
+1. możliwość zrzutu pamięci
+
+2. plik wymiany/pamięć wirtualna
+
+3. hibernacja systemu
+
+4. możliwość odczytu zawartości RAM po restarcie systemu (czasami trzeba ją zamrozić)
+
+5. wykonanie programu na maszynie wirtualnej/zdalnej/w chmurze

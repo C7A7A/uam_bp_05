@@ -1,0 +1,13 @@
+mlock - blokuje strony w zakresie podanego obszaru pamięci zaczynając od "addr" i kontynuuje przez podaną długość "len" bajtów. Wszystkie strony, które zawierają część podanego zakresu będą zapamiętane w pamięci RAM, aż do późniejszego odblokowania.
+
+munlock - odblokowuje strony w zakresie podanego obszaru pamięci zaczynając od "addr" i kontynuuje przez podaną długość "len" bajtów. Po wywołaniu funkcji wszystkie strony, które zawierają część podanego zakresu mogą zostać przeniesione przez kernela do pliku wymiany. 
+
+mlockall - blokuje strony w zakresie podanego obszaru pamięci dla podanego procesu, włączając w to kod, dane, segment stosu, biblioteki współdzielone i pliki mapowane w pamięci. Wszystkie strony, które zawierają część podanego zakresu będą zapamiętane w pamięci RAM, aż do późniejszego odblokowania.
+
+munlockall - odblokowuje wszystkie strony zmapowane w przestrzeni adresowej wywołującego procesu.
+
+Java - należy użyć Java Native Interface (JNI), czyli interfejsu, dzięki któremu mozna uruchomić biblioteki napisane w innych językach (np. w C)
+
+C# 
+1. należy użyć funkcji VirutalLock, GlobalLock, LocalLock, które pozwalają na zablokowanie pewnego obszaru pamięci
+2. należy użyć biblioteki DLL, która umożliwia użycie bibliotek napisanych w innych językach (np. w C)
