@@ -1,8 +1,8 @@
 Jak system(Unix) sprawdza dane logowania teraz:
 1. system czyta dane wprowadzone przez użytkownika (login i hasło).
-2. system porównuje login do danych w pliku /etc/passwd. Jeśli dane się zgadzają przechodzi do kroku 3.
-3. program "login" hashuje wpisane przez użytkownika hasło i porównuje je do skorelowanego z loginem, 
-shashowanego hasła w pliku /etc/passwd.
-4. Jeśli dane się zgadzają system loguje użytkownika.
+2. system porównuje login do danych w pliku /etc/passwd.
+3. program "login" używa funkcji crypt() do shashowania wpisanego przez użytkownika hasło i porównuje je do skorelowanego z loginem, 
+shashowanego hasła w pliku /etc/passwd. (Co ważne "login" używa funkcji crypt() nawet kiedy użytkownik nie wpisał hasła).
+4. Jeśli dane się zgadzają system loguje użytkownika. W innym wypadku wyrzuca błąd i prosi o ponowne podanie loginu i hasła.
 
 różnica w czasie działania dla nowszych systemów:

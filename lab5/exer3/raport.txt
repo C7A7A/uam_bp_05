@@ -6,8 +6,12 @@ mlockall - blokuje strony w zakresie podanego obszaru pamięci dla podanego proc
 
 munlockall - odblokowuje wszystkie strony zmapowane w przestrzeni adresowej wywołującego procesu.
 
-Java - należy użyć Java Native Interface (JNI), czyli interfejsu, dzięki któremu mozna uruchomić biblioteki napisane w innych językach (np. w C)
+Java
+- należy użyć Java Native Interface (JNI), czyli interfejsu, dzięki któremu mozna uruchomić biblioteki napisane w innych językach (np. w C)
+https://docs.oracle.com/javase/7/docs/technotes/guides/jni/
 
 C# 
-1. należy użyć funkcji VirutalLock, GlobalLock, LocalLock, które pozwalają na zablokowanie pewnego obszaru pamięci
+1. należy użyć funkcji VirtualLock, GlobalLock, LocalLock, które pozwalają na zablokowanie pewnego obszaru pamięci (memoryapi.h)
+https://docs.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-virtuallock
 2. należy użyć biblioteki DLL, która umożliwia użycie bibliotek napisanych w innych językach (np. w C)
+https://docs.microsoft.com/en-us/troubleshoot/windows-client/deployment/dynamic-link-library

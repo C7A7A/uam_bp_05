@@ -1,0 +1,125 @@
+452648 Mateusz Czajka
+
+-- zadanie 1 --
+Jak system(Unix) sprawdza dane logowania teraz:
+1. system czyta dane wprowadzone przez użytkownika (login i hasło).
+2. system porównuje login do danych w pliku /etc/passwd.
+3. program "login" używa funkcji crypt() do shashowania wpisanego przez użytkownika hasło i porównuje je do skorelowanego z loginem, 
+shashowanego hasła w pliku /etc/passwd (co ważne, "login" używa funkcji crypt() nawet kiedy użytkownik nie wpisał hasła).
+4. Jeśli dane się zgadzają system loguje użytkownika. W innym wypadku wyrzuca błąd i prosi o ponowne podanie loginu i hasła.
+
+-- zadanie 2 --
+Jak ochronić się przed tego typem ataku?
+Napisać program, który dla każdego zapytania danego typu odpowiada w tym samym czasie (sztuczne wydłużanie czasu do najgorszego przypadku).
+
+-- zadanie 3 --
+main_1.cpp - program bez blokad
+main_2.cpp - program z blokadami
+main_3.cpp - program z jednym wątkiem
+
+raport z czasu działania:
+- wersja bez blokad
+real    0m0.032s
+user    0m0.087s
+sys     0m0.000s
+
+- wersja z blokadami
+real    0m0.777s
+user    0m1.235s
+sys     0m1.068s
+
+- wersja z jednym wątkiem
+real    0m0.022s
+user    0m0.022s
+sys     0m0.000s
+
+Jak widać w powyższym raporcie, dla zadanego problemu, program z jednym wątkiem wykonał obliczenia najszybciej.
+
+-- zadanie 4 --
+- helgrind raport bez blokad
+==676458== Helgrind, a thread error detector
+==676458== Copyright (C) 2007-2017, and GNU GPL'd, by OpenWorks LLP et al.
+==676458== Using Valgrind-3.17.0 and LibVEX; rerun with -h for copyright info
+==676458== Command: ./main_1
+==676458== 
+==676458== ---Thread-Announcement------------------------------------------
+==676458== 
+==676458== Thread #3 was created
+==676458==    at 0x499F5D2: clone (in /usr/lib/libc-2.33.so)
+==676458==    by 0x4888261: create_thread (in /usr/lib/libpthread-2.33.so)
+==676458==    by 0x4889A9D: pthread_create@@GLIBC_2.2.5 (in /usr/lib/libpthread-2.33.so)
+==676458==    by 0x4849237: pthread_create_WRK (hg_intercepts.c:436)
+==676458==    by 0x109210: main (in /home/mateusz/studia/uam_bp/lab4/exer3/main_1)
+==676458== 
+==676458== ---Thread-Announcement------------------------------------------
+==676458== 
+==676458== Thread #2 was created
+==676458==    at 0x499F5D2: clone (in /usr/lib/libc-2.33.so)
+==676458==    by 0x4888261: create_thread (in /usr/lib/libpthread-2.33.so)
+==676458==    by 0x4889A9D: pthread_create@@GLIBC_2.2.5 (in /usr/lib/libpthread-2.33.so)
+==676458==    by 0x4849237: pthread_create_WRK (hg_intercepts.c:436)
+==676458==    by 0x109210: main (in /home/mateusz/studia/uam_bp/lab4/exer3/main_1)
+==676458== 
+==676458== ----------------------------------------------------------------
+==676458== 
+==676458== Possible data race during read of size 8 at 0x10C018 by thread #3
+==676458== Locks held: none
+==676458==    at 0x109195: increment(void*) (in /home/mateusz/studia/uam_bp/lab4/exer3/main_1)
+==676458==    by 0x4849436: mythread_wrapper (hg_intercepts.c:398)
+==676458==    by 0x4889258: start_thread (in /usr/lib/libpthread-2.33.so)
+==676458==    by 0x499F5E2: clone (in /usr/lib/libc-2.33.so)
+==676458== 
+==676458== This conflicts with a previous write of size 8 by thread #2
+==676458== Locks held: none
+==676458==    at 0x1091AF: increment(void*) (in /home/mateusz/studia/uam_bp/lab4/exer3/main_1)
+==676458==    by 0x4849436: mythread_wrapper (hg_intercepts.c:398)
+==676458==    by 0x4889258: start_thread (in /usr/lib/libpthread-2.33.so)
+==676458==    by 0x499F5E2: clone (in /usr/lib/libc-2.33.so)
+==676458==  Address 0x10c018 is 0 bytes inside data symbol "var"
+==676458== 
+==676458== 
+==676458== Use --history-level=approx or =none to gain increased speed, at
+==676458== the cost of reduced accuracy of conflicting-access information
+==676458== For lists of detected and suppressed errors, rerun with: -s
+==676458== ERROR SUMMARY: 3 errors from 1 contexts (suppressed: 0 from 0)
+
+- helgrind raport z blokadami
+==676464== Helgrind, a thread error detector
+==676464== Copyright (C) 2007-2017, and GNU GPL'd, by OpenWorks LLP et al.
+==676464== Using Valgrind-3.17.0 and LibVEX; rerun with -h for copyright info
+==676464== Command: ./main_2
+==676464== 
+==676464== 
+==676464== Use --history-level=approx or =none to gain increased speed, at
+==676464== the cost of reduced accuracy of conflicting-access information
+==676464== For lists of detected and suppressed errors, rerun with: -s
+==676464== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 25365235 from 7)
+
+-- zadanie dodatkowe --
+1. RSA 
+źródło: https://www.cs.sjsu.edu/faculty/stamp/students/article.html
+data wykrycia: w 1996 Kocher zaprezentował wyniki swoich doświadczeń polegające na zastosowaniu "timing attack" na algorytm RSA.
+
+2. OpenSSL
+źródło: https://crypto.stanford.edu/~dabo/papers/ssl-timing.pdf
+data wykrycia: raport z 2003
+
+3. Meltdown i Spectre
+źródła:
+- https://spectreattack.com/
+- https://arxiv.org/abs/1801.01207 (Meltdown)
+- https://arxiv.org/abs/1801.01203 (Spectre)
+data wykrycia: 2017
+
+4. The Clock is Still Ticking: Timing Attacks in the Modern Web
+Ataki na Facebooka, Twittera, LinkedIna, Googla i Amazona
+żródło: https://www.semanticscholar.org/paper/The-Clock-is-Still-Ticking%3A-Timing-Attacks-in-the-Goethem-Joosen/b8a29b3c2a13419ebbd05d1fa42e10db090fb21f
+data wykrycia: praca opublikowana w 2015
+
+5. Zgadywanie haseł - Tenex
+źródło: https://www.sjoerdlangkemper.nl/2016/11/01/tenex-password-bug/
+data wykrycia: 1974
+
+najbardziej narażone:
+- wersje Unixa, które używają funkcji crypt do hashowania haseł. Na starszym sprzęcie użycie funkcji zajmuje wiele czasu. Program do logowania użytkownika używał crypt tylko kiedy login istniał w systemie. W ten sposób można było sprawdzić jakie loginy istnieją w systemie.
+- celem timing attacks są najczęściej inteligentne karty (karty z chipami) oraz serwery webowe, które korzystają z OpenSSL

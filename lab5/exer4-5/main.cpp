@@ -6,24 +6,19 @@
 const int size = 16;
 
 int main() {
-    char preKey[16];
-    // srand(time(NULL));
+    char preKey[size];
+    srand(time(NULL));
 
     if (mlock(&preKey, size) == 0) {
-        std::cout << "LOCKED";
+        std::cout << "Memory locked\n" << "preKey: ";
         for (int i = 0; i < size; i++) {
-            int ch = std::to_chars((rand() % 2));
-            std::cout << "ch: " << ch << std::endl;
-            preKey[i] = ch;
+            preKey[i] = '0' + (rand() % 2);
             std::cout << preKey[i];
         }
-    } else {
-        std::cout << "NOT LOCKED";
-    }
+        munlock(&preKey, size);
+        std::cout << "\nMemory unlocked";
 
-    
-
-    munlock(&preKey, size);
+    } 
 
     return 0;
 }
