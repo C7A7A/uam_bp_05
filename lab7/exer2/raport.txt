@@ -1,0 +1,9 @@
+NASZ (Narodowy Algorytm Szyfrujący) - algorytm opracowany przez Departament Bezpieczeństwa Teleinformatycznego Agencji Bezpieczeństwa Wewnętrznego. Algorytm jest szyfrem przyjętym jako polski standard kryptograficznej ochrony informacji niejawnych. Jego specyfikacja jest niejawna, a implementacje są dostępne wyłącznie w urządzeniach produkowanych na potrzeby rządowe lub wojskowe. NASZ jest oparty na 3DES (algorytm szyfrowania symetrycznego polegający na 3-krotnym przetworzeniu wiadomości algorytmem DES). Algorytm ma również posiadać funkcję whiteningu, której celem jest upodobnienie sygnału wyjściowego do białego szumu. Prawdopodobnie użyto dodatkowych przekształceń, aby udaremnić próby wykorzystania publicznie dostępnych sprzętów z implementacją 3DES do szukania kluczy.
+
+NASZ dostępny jest w kilku odmianach:
+- NASZ-P - służy do ochrony informacji o klauzuli "Poufne"
+- NASZ-T - służy do ochrony informacji o klauzuli "Tajne"
+
+Zabezpieczenia:
+- 3DES(Data Encryption Standard) - wykorzystuje do szyfrowania i deszyfrowania 3 klucze. Najpierw szyfruje wiadomość 1 kluczem, następnie deszyfruje 2 i ponownie szyfruje 3. Uzyskany w ten sposób szyfrogram jest znacznie bezpieczniejszy, ponieważ DES nie tworzy grupy. Atak brute forcem wymaga sprawdzenia 2^112 kluczy.
+- whitening - funkcja wyrównuje spektrum sygnału, upodabniając je do spektrum białego szumu. Moduł wybielania szumów działa podobnie jak filtr automatyczny, który wzmacnia niskopoziomowe składowe widma i tłumi wysokopoziomowe. Dodatkowo, po wybielaniu stosuje się deemfazę (tłumione są wysokie częstotliwości), tak aby widmo przetworzonego sygnału było zbliżone do widma sygnału mowy.
