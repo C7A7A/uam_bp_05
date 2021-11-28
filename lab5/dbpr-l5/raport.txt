@@ -1,0 +1,64 @@
+Mateusz Czajka 452648
+
+--- zadanie 1-2 ---
+1. możliwość zrzutu pamięci
+- przechowywanie kluczy w  bezpiecznym module HSM
+- algorytm generowania klucza w loce z długiego ciągu danych
+- zapisywanie kluczy w formie zaciemnionej (obfuscate)
+- zapisywanie kluczy partiami pod kilkoma adresami w pamięci (w postaci zaciemnionej)
+
+2. plik wymiany/pamięć wirtualna
+- zastosowanie komendy sswap, która służy do znajdowania i usuwania danych, które znajdują się w przestrzeni wymiany
+- (Windows) ustawienie w rejestrze wartości 1 dla ClearPageFileAtShutdown, dzięki czemu plik wymiany jest czyszczony zawsze przy wyłączeniu systemu
+- zabronienie wymiany pamięci dla określonych adresów przestrzeni wirtualnych (MLOCK - Unix, VirtualLock - Windows)
+
+3. hibernacja systemu
+- wymuszenie uwierzytelnienie w celu odszyfrowania dysku przed bootem komputera (hasło/PIN)
+- zrezygnowanie z hibernacji i wyłączanie komputera za każdym razem, gdy kończymy na nim pracę
+
+4. możliwość odczytu zawartości RAM po restarcie systemu (czasami trzeba ją zamrozić) COLD BOOT ATTACK
+- wyłączanie komputera zamiast usypiania/hibernowania i poczekaniu kilku sekund
+- zastosowanie fizycznych zabezpieczeń (np. czujników, które wymuszają czyszczenie pamięci RAM w chwili otwierania obudowy komputera)
+- użycie BIOS/UEFI, które czyści pamięć RAM najszybciej jak to możliwe po włączeniu komputera
+- nowsze kości pamięci (DDR3, DD4) przetrzymują dane w pamięci przez krótszy czas niż starsze standardy
+
+5. wykonanie programu na maszynie wirtualnej/zdalnej/w chmurze
+- należy dodatkowo zaszyfrować przestrzeń maszyny wirtualnej (zdalnej maszyny/chmury) i łączyć się jedynie z zweryfikowanymi połączeniami
+- należy zaszyfrować zrzut rdzenia (core dump) przy pomocy np. klucza znajdującego się w pamięci podręcznej kluczy ESXi
+
+Metoda szybkiego znalezienia klucza kryptograficznego w dużym zrzucie pamięci
+- użycie programu, który jest w stanie zlokalizować klucze w zrzucie pamięci (np. findaes)
+
+Zabezpieczenie
+- sprawić, aby atakujący nie miał uprawnień administratora, ani fizycznego dostępu do urządzenia
+- podpunkt 1
+
+--- zadanie 3 ---
+mlock - blokuje strony w zakresie podanego obszaru pamięci zaczynając od "addr" i kontynuuje przez podaną długość "len" bajtów. Wszystkie strony, które zawierają część podanego zakresu będą zapamiętane w pamięci RAM, aż do późniejszego odblokowania.
+
+munlock - odblokowuje strony w zakresie podanego obszaru pamięci zaczynając od "addr" i kontynuuje przez podaną długość "len" bajtów. Po wywołaniu funkcji wszystkie strony, które zawierają część podanego zakresu mogą zostać przeniesione przez kernela do pliku wymiany. 
+
+mlockall - blokuje strony w zakresie podanego obszaru pamięci dla podanego procesu, włączając w to kod, dane, segment stosu, biblioteki współdzielone i pliki mapowane w pamięci. Wszystkie strony, które zawierają część podanego zakresu będą zapamiętane w pamięci RAM, aż do późniejszego odblokowania.
+
+munlockall - odblokowuje wszystkie strony zmapowane w przestrzeni adresowej wywołującego procesu.
+
+Java
+- należy użyć Java Native Interface (JNI), czyli interfejsu, dzięki któremu mozna uruchomić biblioteki napisane w innych językach (np. w C)
+https://docs.oracle.com/javase/7/docs/technotes/guides/jni/
+
+C# 
+1. należy użyć funkcji VirtualLock, GlobalLock, LocalLock, które pozwalają na zablokowanie pewnego obszaru pamięci (memoryapi.h)
+https://docs.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-virtuallock
+2. należy użyć biblioteki DLL, która umożliwia użycie bibliotek napisanych w innych językach (np. w C)
+https://docs.microsoft.com/en-us/troubleshoot/windows-client/deployment/dynamic-link-library
+
+--- zadanie 4-5 ---
+- exer4-5.cpp 
+
+--- zadanie dodatkowe --- 
+W jaki sposób trwale usunąć dane z nośników danych:
+- fizycznie zniszczyć nośnik danych (np. metoda demagnetyzacji, shreddery niszczące nośnik danych)
+- użycie specjalistycznego oprogramowania do usuwania danych (Eraser, Hardwipe, File Shredder, Microsoft Surface Data Eraser)
+- (HDD) wielokrotne nadpisanie sektorów, w których znajdowały się dane przypadkowymi bitami. Można zastosować tzw. "zerowanie", czyli jedno lub kilkukrotne bitowe zapisanie w kasowanym sektorze ciągu zer.
+- (SSD) zastosowanie mechanizmu "secure erase", czyli mechanizmu usuwania danych wykonywanych bezpośrednio przez kontroler i oprogramowanie dysku SSD. 
+"Secure erase" zeruje każdą komórkę pamięci, w której zapisane były pliki, również z obszaru "spare area" i pusytmi, z których wcześniej przesunięto dane.

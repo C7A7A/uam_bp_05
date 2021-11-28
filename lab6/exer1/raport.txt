@@ -1,0 +1,11 @@
+Pula entropii to zbiór losowości, który uważa się za bezpieczny. Jego nieprzewidywalność zależy od nieodłącznej nieprzewidywalności mierzonego procesu fizycznego lub od niedokładności nieodłącznie związanej z wykonywaniem precyzyjnych pomiarów fizycznych (np. poruszanie myszką, wciskanie klawiszy na klawiaturze).
+
+Urządzenie /dev/random zwraca losowe bajty, spośród oszacowanej liczby bitów szumu w puli, dlatego nadaje się do zastosowań, w których potrzeba jest bardzo wysoka jakość losowości.
+
+Maksymalna wielkość puli entropii można odczytać z pliku /proc/sys/kernel/random/poolsize - zazwyczaj wynosi on 4096b (i tak jest w przypadku mojego komputera).
+
+Aby sprawdzić, ile danych jest zgromadzonych w puli entropii należy zajrzeć do pliku /proc/sys/kernel/random/entropy_avail. Jeśli pula losowa jest pusta, odczyt z /dev/random będzie wstrzymany do czasu zebrania dodatkowego szumu środowiskowego.
+
+W celu obserwowania jak zmienia się wielkość puli entropii wykorzystam polecenie:
+    watch -n 1 cat /proc/sys/kernel/random/entropy_avail
+Będzie ono obserwować co sekundę jakie zmiany zachodzą w pliku entropy_avail. Rozmiar puli entropii zwiększa się bardzo powoli, kiedy nie ingeruje w pracę komputera. Z kolei, kiedy zaczynam coś pisać na klawiaturze, klikać przyciski myszki czy po prostu nią poruszam rozmiar puli entropii zwiększa się dość szybko.

@@ -1,2 +1,6 @@
 W jaki sposób trwale usunąć dane z nośników danych:
-
+- fizycznie zniszczyć nośnik danych (np. metoda demagnetyzacji, shreddery niszczące nośnik danych)
+- użycie specjalistycznego oprogramowania do usuwania danych (Eraser, Hardwipe, File Shredder, Microsoft Surface Data Eraser)
+- (HDD) wielokrotne nadpisanie sektorów, w których znajdowały się dane przypadkowymi bitami. Można zastosować tzw. "zerowanie", czyli jedno lub kilkukrotne bitowe zapisanie w kasowanym sektorze ciągu zer.
+- (SSD) zastosowanie mechanizmu "secure erase", czyli mechanizmu usuwania danych wykonywanych bezpośrednio przez kontroler i oprogramowanie dysku SSD. 
+"Secure erase" zeruje każdą komórkę pamięci, w której zapisane były pliki, również z obszaru "spare area" i pusytmi, z których wcześniej przesunięto dane.

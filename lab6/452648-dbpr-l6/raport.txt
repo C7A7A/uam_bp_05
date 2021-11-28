@@ -1,0 +1,128 @@
+452648 Mateusz Czajka
+
+--- Zadanie 1 ---
+Pula entropii to zbiór losowości, który uważa się za bezpieczny. Jego nieprzewidywalność zależy od nieodłącznej nieprzewidywalności mierzonego procesu fizycznego lub od niedokładności nieodłącznie związanej z wykonywaniem precyzyjnych pomiarów fizycznych (np. poruszanie myszką, wciskanie klawiszy na klawiaturze).
+
+Urządzenie /dev/random zwraca losowe bajty, spośród oszacowanej liczby bitów szumu w puli, dlatego nadaje się do zastosowań, w których potrzeba jest bardzo wysoka jakość losowości.
+
+Maksymalna wielkość puli entropii można odczytać z pliku /proc/sys/kernel/random/poolsize - zazwyczaj wynosi on 4096b (i tak jest w przypadku mojego komputera).
+
+Aby sprawdzić, ile danych jest zgromadzonych w puli entropii należy zajrzeć do pliku /proc/sys/kernel/random/entropy_avail. Jeśli pula losowa jest pusta, odczyt z /dev/random będzie wstrzymany do czasu zebrania dodatkowego szumu środowiskowego.
+
+W celu obserwowania jak zmienia się wielkość puli entropii wykorzystam polecenie:
+    watch -n 1 cat /proc/sys/kernel/random/entropy_avail
+Będzie ono obserwować co sekundę jakie zmiany zachodzą w pliku entropy_avail. Rozmiar puli entropii zwiększa się bardzo powoli, kiedy nie ingeruje w pracę komputera. Z kolei, kiedy zaczynam coś pisać na klawiaturze, klikać przyciski myszki czy po prostu nią poruszam rozmiar puli entropii zwiększa się dość szybko.
+
+--- Zadanie 2 ---
+Odczyt z urządzenie /dev/urandom zwróci tyle bajtów, ile zażądano. Jeśli nie ma wystarczającej losowości w puli losowej, zwracane wartości są teoretycznie narażone na atak kryptograficzny w stosunku do algorytmów wykorzystywanych przez sterownik (wiedza na ten temat jest niedostępna w niezastrzeżonych publikacjach, ale teoretycznie istnieje możliwość przeprowadzenia ataku). 
+
+/dev/random powinno być używane do wszystkiego, z wyjątkiem długoterminowych kluczy GPG/SSL/SSH.
+
+W celu sprawdzenia ile danych jestem w stanie odczytać z pliku /dev/urandom i /dev/random skorzystam z komendy:
+        dd if=/dev/urandom bs=32k of=/dev/null count=476190
+
+/dev/urandom:   15603793920 bytes (16 GB, 15 GiB) copied, 59.3467 s, 263 MB/s
+
+procesor: Intel(R) Core(TM) i5-2520M CPU @ 2.50GHz
+
+--- Zadanie 3 ---
+MicroRNG
+1. przepustowość - 1Mb/s (SPI) - 1.5Mb/s (UART)
+2. czas wygenerowania 1024-bitowej liczby
+3. jakość uzyskanej losowości ~ 0.001s (SPI) 0.0007s (UART)
+Raport z testu Ent dla 229 MB losowego strumienia danych binarnych:
+
+Optimum compression would reduce the size
+of this 240000000 byte file by 0 percent.
+
+Chi square distribution for 240000000 samples is 261.75, and randomly
+would exceed this value 37.23 percent of the times.
+
+Arithmetic mean value of data bytes is 127.4949 (127.5 = random).
+Monte Carlo value for Pi is 3.141685100 (error 0.00 percent).
+Serial correlation coefficient is 0.000020 (totally uncorrelated = 0.0).
+
+Raport z testu NIST: 
+https://tectrolabs.com/assets/tests/microrng-nist-test.txt
+
+Raport z testu rngtest dla 229 MB wygenerowanych losowych bajtów:
+rngtest 5
+Copyright (c) 2004 by Henrique de Moraes Holschuh
+This is free software; see the source for copying conditions.  There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+rngtest: starting FIPS tests...
+rngtest: entropy source drained
+rngtest: bits received from input: 1920000000
+rngtest: FIPS 140-2 successes: 95916
+rngtest: FIPS 140-2 failures: 83
+rngtest: FIPS 140-2(2001-10-10) Monobit: 15
+rngtest: FIPS 140-2(2001-10-10) Poker: 5
+rngtest: FIPS 140-2(2001-10-10) Runs: 29
+rngtest: FIPS 140-2(2001-10-10) Long run: 34
+rngtest: FIPS 140-2(2001-10-10) Continuous run: 0
+rngtest: input channel speed: (min=373.990; avg=23443.557; max=19073.486)Mibits/s
+rngtest: FIPS tests speed: (min=20.845; avg=125.732; max=128.875)Mibits/s
+rngtest: Program run time: 14652830 microseconds
+
+SwiftRNG Pro
+1. przepustowość - 210 Mb/s
+2. czas wygenerowania 1024-bitowej liczby ~ 0.000005s
+3. jakość uzyskanej losowości
+
+Raport oceny entropii dla źródła hałasu (noise source):
+./ea_iid ns1.bin
+Calculating baseline statistics...
+H_original: 7.694589
+H_bitstring: 0.998112
+min(H_original, 8 X H_bitstring): 7.694589
+
+** Passed chi square tests
+
+** Passed length of longest repeated substring test
+
+Beginning initial tests...
+Beginning permutation tests... these may take some time
+** Passed IID permutation tests
+
+Raport z testu NIST:
+https://tectrolabs.com/assets/tests/swiftrng-pro-nist-test.txt
+
+Raport z testu rngtest dla 12 GB wygenerowanych losowych bajtów
+swrng -dd -fn STDOUT -nb 12000000000 | rngtest
+rngtest 5
+Copyright (c) 2004 by Henrique de Moraes Holschuh
+This is free software; see the source for copying conditions.  There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+rngtest: starting FIPS tests...
+rngtest: entropy source drained
+rngtest: bits received from input: 96000000000
+rngtest: FIPS 140-2 successes: 4796227
+rngtest: FIPS 140-2 failures: 3772
+rngtest: FIPS 140-2(2001-10-10) Monobit: 494
+rngtest: FIPS 140-2(2001-10-10) Poker: 455
+rngtest: FIPS 140-2(2001-10-10) Runs: 1453
+rngtest: FIPS 140-2(2001-10-10) Long run: 1395
+rngtest: FIPS 140-2(2001-10-10) Continuous run: 0
+rngtest: input channel speed: (min=9.687; avg=574.973; max=19073.486)Mibits/s
+rngtest: FIPS tests speed: (min=39.736; avg=219.043; max=241.437)Mibits/s
+rngtest: Program run time: 577610829 microseconds
+
+OneRNG:
+1. przepustowość ~ 350kb/s
+2. czas wygenerowania 1024-bitowej liczby ~ 0.003s
+3. jakość uzyskanej losowości
+OneRNG zostało przetestowane w różnych trybach poleceniem ent, który testuje entropię, zbierając 100mB danych w każdym trybie. Wyniki:
+Mode	Entropy bits/byte	Arithmetic mean	  Chi Square	Monte Carlo value for Pi	Serial Correlation
+0	      7.999998	           127.5082	       50%	            3.141540123	                -0.000107
+1	      7.839684	           148.7502	       0.01%	        2.558361194	                 0.000466
+2	      7.999998	           127.5036	       25%	            3.142011216	                 0.000147
+3	      7.999352	           128.8613	       0.01%	        3.107938012	                -0.000299
+6	      7.999998	           127.4945	       25%	            3.141584420	                -0.000044
+7	      7.999998	           127.4969	       90%	            3.141813404	                -0.000096
+
+Entropy: cel to 8bitów/bajtów
+Arithmetic mean: średnia 127,5 to ideał
+Chi Square: wartości od 10% do 90% są dobre
+
+4. whitening
+Użyto generator CRC16, który jest używany do whiteningu. Wrzuca każdy bajt do generatora i wyodrębnia górny bajt z bieżącej sumy CRC - oznacza to, że bity sąsiednich bajtów są scalane i xorowane razem, wyrównując liczbe zer i jedynek.
