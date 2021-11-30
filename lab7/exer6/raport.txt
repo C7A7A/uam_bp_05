@@ -1,0 +1,1 @@
+alert tcp any any -> any 80 (msg:"Date Expires Friday 13th"; content:"Expires: Fri 13"; http_header; sid:1000001; rev:1; )

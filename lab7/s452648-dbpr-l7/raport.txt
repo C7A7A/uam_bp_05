@@ -18,9 +18,28 @@ Zabezpieczenia:
 
 
 --- Zadanie 4 ---
-
+index.js - oryginalny kod
+obsfucatored.js - zaciemniony kod
 
 --- Zadanie 5 ---
+Wybory w Polsce muszą być:
+- powszechne
+- tajne
+- równe
+- bezpośrednie
+
+Każdy obywatel po skończeniu 18 roku życia dostaje fizyczne urządzenie, które działa na podobnej zasadzie jak Two Factor Security Key. Obywatel (np. jego pesel) jest powiązany jedynie z fizycznym urządzeniem. Dzięki temu państwo posiada bazę danych, w której skorelowani są obywatele z urządzeniami (obywatel może wymienić urządzenie na nowe, zablokowac jego działanie itd.). W tej sytuacji każdy zdolny do głosowania obywatel powinien mieć jedno urządzenie, które pozwoli mu na zagłosowanie jeden raz w konkretnych wyborach. 
+
+Urządzenie przechowuje unikalny hash, którym będzie porozumiewało się z oddzielną bazą danych (w tej znajdują się JEDYNIE unikalne hashe, które zostały wcześniej wygenerowane) w chwili oddawania głosu.
+
+W okresie przeprowadzania wyborów jedynym sposobem na oddanie głosu jest użycie urządzenia. Po włożeniu urządzenia do portu i otwarciu witryny do głosowania obywatel jest w stanie oddać głos na jednego z kandydatów. Po oddaniu głosu baza unikalnych hashy jest akutalizowana i nie można oddać kolejnego głosu przy użyciu konkretnego hasha. Po terminie wyborów hashe są odblokowywane i będzie można ich użyć w kolejnych wyborach.
+
+- powszechne - każdy obywatel posiada urządzenie, dzięki któremu jest w stanie zagłosować
+- tajne - nikt oprócz konkretnego obywatela nie ma sposobu na sprawdzenia jak ten zagłosował. Jeśli urządzenie zostanie skradzione/zgubione obywatel zawsze może udać się do urzędu zablokować urządzenie i dostać nowe.
+- równe - jedno urządzenie = jeden hash = jeden głos
+- bezpośrednie - obywatel sam używa swojego urządzenia do oddania głosu
 
 
 --- Zadanie 6 ---
+alert tcp any any -> any 80 (msg:"Date Expires Friday 13th"; content:"Expires: Fri 13"; http_header; sid:1000001; rev:1; )
+
