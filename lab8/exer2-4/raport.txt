@@ -1,0 +1,61 @@
+Advisory locking - Blokowanie advisory wymaga kooperacji procesów. Załóżmy, że proces A dostaje od systemu blokadę WRITE i zaczyna zapisywać dane do pliku. Jeśli proces B otworzy plik i również zacznie do niego zapisywać to będzie procesem niewspółpracującym. Blokowanie advisory zadziała jedynie jeśli proces B poprosi o blokadę WRITE przed rozpoczęciem zapisywania do pliku. Taka metoda blokowania działa jedynie wtedy, kiedy wszystkie procesy walczące o blokadę respektują ją. 
+
+Mandatory locking - Blokowanie mandatory nie wymaga kooperacji procesów. Przy każdej próbie otwarcia, odczytu czy zapisu do pliku kernel weryfikuje czy wywołujący akcję proces w tym momencie nie narusza 
+blokady na danym pliku.
+
+polecenie lslocks - listuje wszystkie blokady w systemie
+
+Przykład kodu blokującego blokadę:
+file_lock.c - plik z kodem
+
+    1.  # mount -oremount,mand / -> Ponowne zamontowanie systemu plików z opcją "mand" (blokowanie mandatory na poziomie systemu plików)
+    2.
+        # touch advisory.txt
+        # touch mandatory.txt
+        # chmod g+s,g-x mandatory.txt
+    3.  # ./file_lock advisory.txt -> Program czeka na dane od użytkownika z innego terminala
+    4.  # ls >> advisory.txt -> Polecenie ls zapisze dane wyjściowe do pliku advisory.txt. Nawet jeśli zdobędziemy blokadę zapisu, nadal jakiś inny proces, który nie współpracuje będzie mógł zapisać do
+                                pliku (advisory locking)
+    5.  # ./file_lock mandatory.txt -> Program czeka na dane od użytkownika z innego terminala
+    6.  # ls >>mandatory.txt -> Polecenie ls poczeka na zdjęcie blokady zanim zapisze dane wyjściowe do pliku mandatory.txt. Blokowanie jest osiągane za pomocą mandatory locking
+
+Typ blokady w moim systemie
+Standardowo włączone jest blokowanie advisory. Aby włączyć blokowanie mandatory należy zrobić to na poziomie systemu plików oraz na poziomie poszczególnych plików.
+    1. Zamontować system plików z opcją "-o mand"
+    1. Należy włączyć opcje set-group-ID i wyłączyć goup-execute dla lock_file, aby włączyć blokowanie mandatory dla konkretnego pliku
+
+Mechanizmy blokowania plików
+1. BSD locks (flock) 
+* nieokreślone w POSIX
+* szeroko dostępne na róznych Unixowych systemach
+* zawsze blokuje cały plik
+* blokada związana z obiektem pliku
+* nie gwarantuje atomowego przełączania między trybami blokowania
+* od wersji Linux 2.6.12 blokady w NFS są emulowane przy użyciu fcntl
+
+2. POSIX record locks (fcntl)
+* określone w POSIX (standard)
+* pozwala na blokowanie części pliku (przyjmuje jako argument rozmiar bajtów, jaki ma zablokować)
+* powiązany z parą (i-node, pid) zamiast z obiektem pliku
+* gwarantuje atomowe przełączanie między trybami blokowania
+* działa na NFS
+
+3. lockf
+* określone w POSIX
+* pozwala na blokowanie części pliku (przyjmuje jako argument rozmiar bajtów, jaki ma zablokować)
+* powiązany z parą (i-node, pid) zamiast z obiektem pliku
+* obsługuje tylko blokady "exclusive" 
+* działa na NFS
+
+4. Open file description locks (fcntl) NON POSIX
+* nieokreslone w POSIX
+* pozwala na blokowanie części pliku (przyjmuje jako argument rozmiar bajtów, jaki ma zablokować)
+* blokada związana z obiektem pliku
+* gwarantuje atomowe przełączanie między trybami blokowania
+* działa na NFS
+
+Znalezione mechanizmy blokowania plików w moim systemie:
+- flock
+- lockf
+- fcntl
+- lockfile (tworzy jeden lub więcej plików semaforowych)
