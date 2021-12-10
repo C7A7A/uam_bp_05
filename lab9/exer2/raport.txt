@@ -1,0 +1,8 @@
+Problemy związane z bezpieczeństwem przy parsowaniu UTF-8:
+1.
+
+2.
+
+3.
+
+4.

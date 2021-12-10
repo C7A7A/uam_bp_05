@@ -1,0 +1,10 @@
+Secure attention key (SAK) - specjalny klawisz lub kombinacja klawiszy, która powinna być naciśnięta przed ekranem logowania. Jądro systemu wchodząc w bezpośrednią interakcję ze sprzętem jest w stanie określić, czy odpowiednie klawisze zostały naciśnięte. Jeśli tak to system rozpoczyna proces zaufanego logowania. 
+
+Dlaczgo przed logowaniem w Windowsie zaleca się nacisnięcie SAK?
+SAK został stworzony, w celu uniemożliwienia fałszywego logowania, ponieważ jądro zawiesi każdy program przed rozpoczęciem zaufanej operacji logowania.
+
+Przykładowy SAK dla:
+a) Windows NT
+Ctrl+Alt+Delete
+b) Linux
+Alt+SysRq+K

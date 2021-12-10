@@ -1,0 +1,10 @@
+Dlaczego skrypty shellowe nie powinny mieć podwyższanych uprawnień?
+
+Dowolny program może zostać zaatakowany. Domyślnie procesy uruchamianie są z uprawnieniami takimi jakie ma użytkownik włączający je. W rezultacie jeśli atakujący znajdzie, wykorzysta lukę bezpieczeństwa i uruchomi swój program na komputerze atakowanego to będzie on miał maksymalnie takie uprawnienia jak zalogowany użytkownik.
+
+Jeśli użytkownik zalogował się z ograniczonymi uprawnieniami, program powinien z nimi działać. To skutecznie ogranicza ilość szkód, jakie może wyrządzić atakujący po uruchamieniu złośliwego kodu. Należy jednak pamiętać, że jeśli podniesiemy uprawnienia procesu do uruchamiania jako root, napastnik może uzyskać te uprawnienia i potencjalnie przejąć kontrolę nad całym systemem.
+
+Jeśli atakujący uzyska uprawnienia administratora, może podnieść je do poziomu uprawnień roota i uzyskać dostęp do wszelkich danych na komputerze użytkownika. Dlatego dobrą praktyką bezpieczeństwa jest logowanie się jako administrator tylko podczas wykonywania rzadkich zadań wymagających uprawnień administratora.
+
+Idea ograniczania ryzyka poprzez ograniczanie dostępu wywodzi się z polityki "need to know" stosowanej przez rządowe agencje bezpieczeństwa (bez względu na posiadane poświadczenie bezpieczeństwa nie uzyskuje się dostępu do informacji, chyba że istnieje konkretna potrzeba ich poznania). W bezpieczeństwie oprogramowania, ta polityka jest często nazywana zasadą najmniejszych przywilejów.
+
