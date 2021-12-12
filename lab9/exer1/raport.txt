@@ -1,0 +1,14 @@
+1. Czy możemy sprawdzić, jakie są prawa dostępu do plik.txt za pomocą ls -l?
+Tak, możemy. 
+
+ls -l kat/plik.txt
+-rw-rw---- 1 nobody nobody 0 Dec 12 16:31 kat/plik.txt
+
+2. Czy możemy zmienić zawartość pliku plik.txt?
+nie
+
+3. Czy możemy usunąć plik plik.txt?
+tak
+
+4. Czy możemy usunąć katalog kat?
+nie
