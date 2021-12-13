@@ -1,14 +1,17 @@
 1. Czy możemy sprawdzić, jakie są prawa dostępu do plik.txt za pomocą ls -l?
-Tak, możemy. 
+nie możemy jeśli użyjemy ls -l wewnątrz katalogu kat. Nie mamy prawa odczytu do folderu kat.
+ls -l kat/
+ls: cannot open directory 'kat/': Permission denied
 
+możemy jeśli podamy ścieżkę do pliku plik.txt
 ls -l kat/plik.txt
 -rw-rw---- 1 nobody nobody 0 Dec 12 16:31 kat/plik.txt
 
 2. Czy możemy zmienić zawartość pliku plik.txt?
-nie
+nie możemy, ponieważ nie mamy prawa zapisu do pliku plik.txt
 
 3. Czy możemy usunąć plik plik.txt?
-tak
+tak, ponieważ usuwanie plików zależy od naszych uprawnień do katalogu, w którym znajduję się plik, a my mamy uprawnienie 'execute' dla folderu kat.
 
 4. Czy możemy usunąć katalog kat?
-nie
+usuwanie katalogów zależy od uprawnień użytkownika do katalogu nadrzędnego, więc możemy usunąć katalog kat jesli mamy takie prawo do usuwania dla katalogu nadrzędnego.
