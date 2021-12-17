@@ -1,0 +1,27 @@
+-fomit-frame-pointer - opcja nakazuje kompilatorowi nie przechowywać w rejestrach wskaźników ramki stosu podczas wywoływania funkcji, jeśli ta tego nie potrzebuje. Pozwala to na uniknięcie instrukcji zapisywania, ustawiania i przywracania wskaźników ramki. Uniemożliwia to również debugowanie kodu na niekórych maszynach. Opcja stosowana jest też w celu zmniejszenia rozmiaru obrazu kodu.
+
+wybrane opcje -f, które wpływają na
+a) wydajność
+-foptimize-strlen - optymalizuje wiele standardowych funkcji łancuchowych C (strlen, strchr, strcpy) i ich odpowiedniki w szybsze alternatywy.
+
+-faggressive-loop-optimizations - opcja nakazuje optymalizarowi pętli, aby używał ograniczeń języka do określenia limitu liczby iteracji pętli. Zakłada to, że kod pętli nie wywołuje niezdefiniowanego zachowania, powodując przepełnienie liczb całkowitych lub dostęp do tablicy "out-of-boud". Opcja ta jest domyślnie włączona.
+
+-fpredictive-commoning - ponowne wykorzystanie wykonywanych obliczeń (w szczególności ładowań i zapisów pamięci) w poprzednich iteracjach pętli. Opcja jest domyślnie włączona na poziomie -O3.
+
+-fweb - Kkonstruuje sieci w sposób powszechnie stosowany dla celów alokacji rejestrów i przypisuje każdej sieci indywidualny pseudo rejestr. Pozwala to narzędziu alokującemu rejestry na bezpośrednie operowanie na pseudo, ale także wzmacnia kilka innych narzędzi optymalizacyjnych, takich jak CSE, optymalizator pętli i "trivial dead code remover". Może to jednak uniemożliwić debugowanie, ponieważ zmienne nie pozostają już w "rejestrze domowym".
+
+b) bezpieczeństwo
+-fstack-protector - generuje dodatkowy kod, który sprawdza czy bufory się przepełniają. Odbywa się to poprzez dodanie "strażnika" do funkcji z podatnościami na atak. "Strażnik" dodawany jest np. do funkcji wywołujących "alloc" oraz funkcji z buforami większymi niż 8 bajtów. "Strażnicy" są inicjalizowani na wejściu do funkcji, a następnie sprawdzani przy wyjściu z funkcji. 
+
+-fstack-protector-all - to samo co -fstack-protector, ale działa dla wszystkich funkcji.
+ 
+-fstack-protector-strong - to samo co -fstack-protector, ale działa dodatkowo na funkcje, które mają lokalne definicje tablic lub mają odniesienia do lokalnych adresów ramek
+
+-fstack-protector-explicit - to samo co -fstack-protector, ale chroni jedynie funkcje, które mają zdefiniowany atrybut "stack_protect"
+
+-fstack-clash-protection - generuje dodatkowy kod, który ma na celu zapobiec atakom "stack clash". Kiedy opcja jest włączona, kompilator będzie alokował tylko jedną stronę przestrzeni stosu w danym momencie, a każda strona będzie udostępniona natychmiast po przydziale. Zapobiega to od skakania przydziałom na dowolną, chronioną stronę udostępnioną przez system operacyjny.
+
+
+-ftrapv - generuje pułapki dla przepełnień przy dodawaniu, odejmowaniu i mnożeniu.
+
+-fvtable-verify=[std|preinit|none] - umożliwia sprawdzenie w czasie działania programu każdego wywołania czy wskaźnik vtable przez który następuje wywołanie jest prawidłowy dla typu obiektu i nie został uszkodzony lub nadpisany. Jeśli podczas uruchamiania zostanie wykryty nieprawidłowy wskaźnik tablicy vtable, zostanie zgłosony błąd, a wykonanie programu zostanie wstrzymane.
