@@ -6,8 +6,12 @@ int main(){
 	long abc[10];
 	long def[10];
 
-	for(int i=0;i<30;i++) abc[i]=i;
+	for (int i=0;i<30;i++) {
+		abc[i]=i;
+	}
 	abc[0]++;
-	for(int i=0;i<10;i++) cout << def[i] << endl;
-	cout << sizeof(long) << sizeof(int) << sizeof(long long) << endl;	
+
+	for (int i=0;i<10;i++) {
+		cout << def[i] << endl;
+	}
 }

@@ -1,0 +1,21 @@
+W językach C oraz C++ istnieje coś takiego jak nizdefiniowane zachowanie. Są to rzeczy nieokreślone przez standard języka z różnych powodów. Kiedy spotykamy się z nizdefiniowanym zachowaniem różne nieprzewidziane rzeczy mogą się stać (czasem nawet może się nam wydawać, że aplikacja działa poprawnie). 
+
+W sytuacji naszego progamu standard języka nie mówi co ma się wydarzyć kiedy próbujemy uzyskać dostęp do elementów poza granicą tablicy.  
+
+Przy kompilacji i uruchomieniu programu widzimy, że w tablicy def znajdują się takie same elementy jak w indeksach abc od 10-19. Dzieje się tak, ponieważ nadpisujemy części stosu, które nie są używane (tak naprawdę należą one do talbicy def).
+
+1. zmianie typu przechowywanego w tablicy (na typ o innym rozmiarze)
+
+Przy zmianie typu danych tablicy (w różnych konfiguracjach long-long, int-int, long-int, int-long) kompilator rezerwuje różną ilość miejsca dla naszych tablic. Największą różnicę widać oczywiście przy typach long-long (po 8 bajtów) i int-int (po 4 bajty). Po tym jak kompilator zarezerwuje pamięć dla tablic próbuję "dostać" się do elementów spoza tablicy. W tej sytuacji zależnie od rodzaju danych tablicy dzieją się nieprzewidzane rzeczy. Przy typie int-int zauważyć można, że tablica def zapisane ma w pamięci elementy od 12-21. W przypadku int-long wszystkie elementy tablicy def pochodzą z losowych miejsc w pamięci. W przypadku long-int większośc elementów tablicy pochodzi z losowych miejsc w pamięci, reszta to 0 lub 1.
+
+2. zmianie rozmiaru pierwszej tablicy
+
+Przy zmniejszeniu rozmiaru pierwszej tablicy widać, że w tablicy def przechowywane są po prostu kolejne elementy, które chcemy przypisać do tablicy abc (dla abc[5], tablica def będzie przechowywać elementy o wartości 6-15)
+
+Przy zwiększeniu rozmiaru pierwszej tablicy nawet o 1, tablica def zacznie przechowywać dane z losowych miejsc w tablicy.
+
+3. próbie optymalizacji
+
+Przy próbie optymalizacji z opcją -O3 lub -O2 kompilator ostrzega nas o niezdefiniowanych zachowaniu przy 11 iteracji pętli for (flaga -Waggressive-loop-optimizations). Dzięki opcji -O3/-O2 w tablicy def nie ma już elementów, które chcieliśmy dodać poza granicę talbicy abc. 
+
+Opcja -O0 nie zmienia wyników programu

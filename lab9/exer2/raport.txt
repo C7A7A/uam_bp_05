@@ -1,8 +1,11 @@
 Problemy związane z bezpieczeństwem przy parsowaniu UTF-8:
-1.
+1. używanie specjalnych znaków z innych alfabetów niż łaciński do podszywania się pod znane strony internetowe np. pгacuj.pl
+(г użyte jako r)
 
-2.
+2. niekóre znaki w utf-8 można zapisać na wiele sposobów np. "ö" jako U+00F6 (ŁACIŃSKA MAŁA LITERA O Z DIAEREZĄ) lub U+0061 U+0308 (ŁACIŃSKA MAŁA LITERA O + ŁĄCZENIE DIAEREZ). Może to doporowadzić do problemów jeśli w jednym miejscu naszego programu rozróżniamy te znaki od siebie, a w innych nie. 
 
-3.
+Załóżmy, że w naszej aplikacji jedynie w procesie rejestracji rozróżniamy te znaki. W reszcie logiki naszej aplikacji nie rozróżniamy ich. Pozwoli to użytkownikowi na założenie konto o loginie "foö" (U+00F6) oraz innemy użytkownikowi na założenie konta "foö" (U+0061 U+0308). Może to oznaczać, że np. w którymś miejscu naszej aplikacji dane zapisane przez uzytkownika "foö" (U+00F6) zostaną nadpisane przez użytkownika "foö" (U+0061 U+0308) lub odwrotnie.
 
-4.
+3. parsowanie danych od użytkownika w formacie utf-8, a następnie zapisywanie ich w bazie danych, która obsługuje inny format może doporowadzić do wielu nieścisłości. 
+
+4. używanie specjalnych znaków, które nie są widoczne dla użytkownika tzw. non-printable character (np. spacja o szerokości 0). ICANN zabrania używania takich znaków w nazwach domen.

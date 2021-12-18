@@ -1,0 +1,7 @@
+of ​​user -> postać widoczna
+<pre>of ​​user</pre> -> postać w HTML-u
+3c 70 72 65 3e 6f 66 20 e2 80 8b e2 80 8b 75 73 65 72 3c 2f 70 72 65 3e -> postać bajtowa
+<pre>of ââuser</pre> -> postać ASCII
+
+najciekawszym elementem jest â (e2 80 8b), czyli "ukrytą" spację, a tak naprawdę spację o szerokości 0.
+https://www.cogsci.ed.ac.uk/~richard/utf-8.cgi?input=342+200+213&mode=obytes

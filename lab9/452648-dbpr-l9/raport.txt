@@ -1,13 +1,79 @@
 452648 Mateusz Czajka
 
 -- Zadanie 1 --
+1. Czy możemy sprawdzić, jakie są prawa dostępu do plik.txt za pomocą ls -l?
+nie możemy jeśli użyjemy ls -l wewnątrz katalogu kat. Nie mamy prawa odczytu do folderu kat.
+ls -l kat/
+ls: cannot open directory 'kat/': Permission denied
+
+możemy jeśli podamy ścieżkę do pliku plik.txt
+ls -l kat/plik.txt
+-rw-rw---- 1 nobody nobody 0 Dec 12 16:31 kat/plik.txt
+
+2. Czy możemy zmienić zawartość pliku plik.txt?
+nie możemy, ponieważ nie mamy prawa zapisu do pliku plik.txt
+
+3. Czy możemy usunąć plik plik.txt?
+tak, ponieważ usuwanie plików zależy od naszych uprawnień do katalogu, w którym znajduję się plik, a my mamy uprawnienie 'execute' dla folderu kat.
+
+4. Czy możemy usunąć katalog kat?
+usuwanie katalogów zależy od uprawnień użytkownika do katalogu nadrzędnego, więc możemy usunąć katalog kat jeśli mamy takie prawo do usuwania dla katalogu nadrzędnego.
 
 -- Zadanie 2 --
+Problemy związane z bezpieczeństwem przy parsowaniu UTF-8:
+1. używanie specjalnych znaków z innych alfabetów niż łaciński do podszywania się pod znane strony internetowe np. pгacuj.pl
+(г użyte jako r)
+
+2. niektóre znaki w utf-8 można zapisać na wiele sposobów np. "ö" jako U+00F6 (łacińska mała litera o z "umlaut") lub U+0061 U+0308 (łacińska mała litera o + łączenie "umlaut"). Może to doprowadzić do problemów jeśli w jednym miejscu naszego programu rozróżniamy te znaki od siebie, a w innych nie. 
+
+Załóżmy, że w naszej aplikacji jedynie w procesie rejestracji rozróżniamy te znaki. W reszcie logiki naszej aplikacji nie rozróżniamy ich. Pozwoli to użytkownikowi na założenie konto o loginie "foö" (U+00F6) oraz innemu użytkownikowi na założenie konta "foö" (U+0061 U+0308). Może to oznaczać, że np. w którymś miejscu naszej aplikacji dane zapisane przez użytkownika "foö" (U+00F6) zostaną nadpisane przez użytkownika "foö" (U+0061 U+0308) lub odwrotnie.
+
+3. parsowanie danych od użytkownika w formacie utf-8, a następnie zapisywanie ich w bazie danych, która obsługuje inny format może doprowadzić do wielu nieścisłości. 
+
+4. używanie specjalnych znaków, które nie są widoczne dla użytkownika tzw. non-printable character (np. spacja o szerokości 0). ICANN zabrania używania takich znaków w nazwach domen.
 
 -- Zadanie 3 --
+Dlaczego skrypty shellowe nie powinny mieć podwyższanych uprawnień?
+
+Dowolny program może zostać zaatakowany. Domyślnie procesy uruchamiane są z uprawnieniami takimi jakie ma użytkownik włączający je. W rezultacie jeśli atakujący znajdzie, wykorzysta lukę bezpieczeństwa i uruchomi swój program na komputerze atakowanego to będzie on miał maksymalnie takie uprawnienia jak zalogowany użytkownik.
+
+Jeśli użytkownik zalogował się z ograniczonymi uprawnieniami, program powinien z nimi działać. To skutecznie ogranicza ilość szkód, jakie może wyrządzić atakujący po uruchomieniu złośliwego kodu. Należy jednak pamiętać, że jeśli podniesiemy uprawnienia procesu do uruchamiania jako root, napastnik może uzyskać te uprawnienia i potencjalnie przejąć kontrolę nad całym systemem.
+
+Jeśli atakujący uzyska uprawnienia administratora, może podnieść je do poziomu uprawnień roota i uzyskać dostęp do wszelkich danych na komputerze użytkownika. Dlatego dobrą praktyką bezpieczeństwa jest logowanie się jako administrator tylko podczas wykonywania rzadkich zadań wymagających uprawnień administratora.
+
+Idea ograniczania ryzyka poprzez ograniczanie dostępu wywodzi się z polityki "need to know" stosowanej przez rządowe agencje bezpieczeństwa (bez względu na posiadane poświadczenie bezpieczeństwa nie uzyskuje się dostępu do informacji, chyba że istnieje konkretna potrzeba ich poznania). W bezpieczeństwie oprogramowania, ta polityka jest często nazywana zasadą najmniejszych przywilejów.
+
 
 -- Zadanie 4 --
+Secure attention key (SAK) - specjalny klawisz lub kombinacja klawiszy, która powinna być naciśnięta przed ekranem logowania. Jądro systemu wchodząc w bezpośrednią interakcję ze sprzętem jest w stanie określić, czy odpowiednie klawisze zostały naciśnięte. Jeśli tak to system rozpoczyna proces zaufanego logowania. 
+
+Dlaczego przed logowaniem w Windowsie zaleca się naciśnięcie SAK?
+SAK został stworzony, w celu uniemożliwienia fałszywego logowania, ponieważ jądro zawiesi każdy program przed rozpoczęciem zaufanej operacji logowania.
+
+Przykładowy SAK dla:
+a) Windows NT
+Ctrl+Alt+Delete
+b) Linux
+Alt+SysRq+K
 
 -- Zadanie 5 --
+Atak z użyciem podsłuchu polega na przechwyceniu, usunięciu lub modyfikacji danych przesyłanych między urządzeniami. Podsłuchiwanie, znane również jako sniffing lub snooping wykorzystuje niezabezpieczoną komunikację sieciową w celu uzyskaniu dostępu do przesyłanych danych.
+
+Podsłuchiwanie ma zwykle miejsce, gdy użytkownik łączy się z siecią, w której ruch nie jest zabezpieczony lub zaszyfrowany i wysyła poufne dane do innego urządzenia. Daje to możliwość atakującemu możliwość wykorzystania luki w zabezpieczeniach i przechwycenia danych różnymi metodami. Ataki z użyciem podsłuchu są bardzo często trudne do wykrycia, ponieważ mogą nie wpływać negatywnie na wydajność urządzeń i sieci.
+
+współczesne techniki podsłuchiwania:
+1. użycie ukrytej pluskwy
+2. odtworzenie zawartości monitora przy wykorzystaniu promieni elektromagnetycznych, które emituje komputer. Sygnały te mogą być przenoszone na odległość wielu metrów i przedłużane dalej przez kable i linie telefoniczne, które mogą być używane jako anteny.
+3. elektroniczne systemy monitorowania i kontroli parametrów pracy. Systemy takie mają, co do zasady, monitorować i kontrolować wydajność pracowników. W przypadku takich systemów często jednak dochodzi do przypadków niezamierzonego podsłuchu np. nagrywanie przypadkowych rozmów telefonicznych czy konwersacji między pracownikami
+4. keyloggery, czyli programy do przechwytywania co użytkownik wpisuje w klawiaturę. Rejestrowanie uderzeń klawiszy może dostarczyć szczegółowych informacji na temat takich czynności jak szybkość pisania, pauzy, usuwanie tekstów i inne zachowania. 
+5. atak man-in-the-middle jest aktywną metodą podsłuchiwania, która polega na włamaniu się do systemu sieciowego. Atakujący zyskuje kontrolę nad komunikacją między użytkownikami.  Może podsłuchiwać komunikację, jak i modyfikować wiadomości wysyłane przez uczestników rozmowy. W czasie ataku każdy z użytkowników jest przekonany, że rozmowa, w której uczestniczy jest prywatna. 
+6. Skype & Type (S&T) to nowy atak z użyciem podsłuchu używający klawiatury akustycznej, która wykorzystuje Voice-Over IP (VOIP). Atak jest praktyczny i może być wykorzystany w wielu zastosowaniach, ponieważ nie wymaga od atakujących przebywania w pobliżu ofiary i może działać na podstawie tylko niektórych wyciekłych naciśnięć klawiszy zamiast każdego naciśnięcia. Przy pewnej wiedzy na temat wzorców pisania na klawiaturze ofiary, atakujący może uzyskać nawet 91.7% dokładności wpisywanych przez użytkownika liter.
 
 -- Zadanie dodatkowe --
+of ​​user -> postać widoczna
+<pre>of ​​user</pre> -> postać w HTML-u
+3c 70 72 65 3e 6f 66 20 e2 80 8b e2 80 8b 75 73 65 72 3c 2f 70 72 65 3e -> postać bajtowa
+<pre>of ââuser</pre> -> postać ASCII
+
+najciekawszym elementem jest â (e2 80 8b), czyli "ukrytą" spację, a tak naprawdę spację o szerokości 0.
+https://www.cogsci.ed.ac.uk/~richard/utf-8.cgi?input=342+200+213&mode=obytes
