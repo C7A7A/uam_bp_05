@@ -1,0 +1,24 @@
+452648 Mateusz Czajka
+
+--- Zadanie 1-2 ---
+
+--- Zadanie 3 ---
+Co moim zdaniem można zrobić, aby "ulepszyć" przedmiot:
+
+Wykłady:
+- pokolorowanie kodu w prezentacjach na jakiś motyw. Na przykład przy użyciu narzędzia: https://codebeautify.org/code-highlighter. O wiele łatwiej jest wtedy zauważyć co własciwie dany kod robi i zrozumieć go.
+- przygotowanie środowiska i skryptów do zaprezentowania róznych podatności/ataków (np. timing attack). Myślę, że zobaczenie "na żywo" jak pewne rzeczy działają może znacznie podnieść atrakcyjność wykładów. Dodatkowo, czasami cięzko zrozumieć pewne koncepcje, kiedy opieramy się jedynie na teorii.
+- linki do dodatkowych źródeł na końcu prezentacji, związane z tematem zajęć, jeśli ktoś byłby zainteresowany pogłębieniem tematu.
+
+Ćwiczenia:
+- udostępnienie "modelowych" rozwiązań zadań po terminie ich przyjmowania. Uważam, że takie coś byłoby fajne, bo sam często miałem poczucie, że pomijam jakiś aspekt zadania albo po prostu nie potrafiłem czegoś zrobić. 
+- więcej zadań (podobnych do dzisiejszego labiryntu), gdzie mamy przygotowany wadliwy/częściowo wadliwy kod. Zadaniem studenta byłoby znalezienie błędów w aplikacji, opisanie ich (dlaczego są to właściwie błędy, co powodują itd.), a następnie naprawienie ich i opisanie sposobu naprawy. Dla mnie wlaśnie takie zadania są najciekawsze ponieważ:
+    a) są związane z programowaniem
+    b) wymagają zastosowania teoretycznej wiedzy w praktyce
+    c) widać efekty błędów
+    d) widać efekty naprawy błędów
+- uważam, że mieszanie zadań z róznych wykładów na ćwiczeniach jest w porządku, ale wolałbym żeby nie pojawiały się zadania z wykładów, których jeszcze nie przerobiliśmy.
+
+--- Zadanie 4 ---
+mazes_test.txt - 3 przykładowe layouty labiryntu
+exer4.cpp - zmodyfikowany kod do przchodzenia labiryntu

@@ -1,10 +1,59 @@
 452648 Mateusz Czajka
 
 --- Zadanie 1 ---
+W językach C oraz C++ istnieje coś takiego jak niezdefiniowane zachowanie. Są to rzeczy nieokreślone przez standard języka z różnych powodów. Kiedy spotykamy się z nizdefiniowanym zachowaniem różne nieprzewidziane rzeczy mogą się stać (czasem nawet może się nam wydawać, że aplikacja działa poprawnie). 
+
+W sytuacji naszego programu standard języka nie mówi co ma się wydarzyć kiedy próbujemy uzyskać dostęp do elementów poza granicą tablicy.  
+
+Przy kompilacji i uruchomieniu programu widzimy, że w tablicy def znajdują się takie same elementy jak w indeksach abc od 10-19. Dzieje się tak, ponieważ nadpisujemy części stosu, które nie są używane (tak naprawdę należą one do tablicy def).
+
+1. zmianie typu przechowywanego w tablicy (na typ o innym rozmiarze)
+
+Przy zmianie typu danych tablicy (w różnych konfiguracjach long-long, int-int, long-int, int-long) kompilator rezerwuje różną ilość miejsca dla naszych tablic. Największą różnicę widać oczywiście przy typach long-long (po 8 bajtów) i int-int (po 4 bajty). Po tym jak kompilator zarezerwuje pamięć dla tablic próbuję "dostać" się do elementów spoza tablicy. W tej sytuacji zależnie od rodzaju danych tablicy dzieją się nieprzewidziane rzeczy. Przy typie int-int zauważyć można, że tablica def zapisane ma w pamięci elementy od 12-21. W przypadku int-long wszystkie elementy tablicy def pochodzą z losowych miejsc w pamięci. W przypadku long-int większość elementów tablicy pochodzi z losowych miejsc w pamięci, reszta to 0 lub 1.
+
+2. zmianie rozmiaru pierwszej tablicy
+
+Przy zmniejszeniu rozmiaru pierwszej tablicy widać, że w tablicy def przechowywane są po prostu kolejne elementy, które chcemy przypisać do tablicy abc (dla abc[5], tablica def będzie przechowywać elementy o wartości 6-15)
+
+Przy zwiększeniu rozmiaru pierwszej tablicy nawet o 1, tablica def zacznie przechowywać dane z losowych miejsc w tablicy.
+
+3. próbie optymalizacji
+
+Przy próbie optymalizacji z opcją -O3 lub -O2 kompilator ostrzega nas o niezdefiniowanych zachowaniu przy 11 iteracji pętli for (flaga -Waggressive-loop-optimizations). Dzięki opcji -O3/-O2 w tablicy def nie ma już elementów, które chcieliśmy dodać poza granicę tablicy abc. 
+
+Opcja -O0 nie zmienia wyników programu
 
 --- Zadanie 2 ---
+exer2.cpp
 
 --- Zadanie 3 ---
+-fomit-frame-pointer - opcja nakazuje kompilatorowi nie przechowywać w rejestrach wskaźników ramki stosu podczas wywoływania funkcji, jeśli ta tego nie potrzebuje. Pozwala to na uniknięcie instrukcji zapisywania, ustawiania i przywracania wskaźników ramki. Uniemożliwia to również debugowanie kodu na niektórych maszynach. Opcja stosowana jest też w celu zmniejszenia rozmiaru obrazu kodu.
+
+wybrane opcje -f, które wpływają na
+a) wydajność
+-foptimize-strlen - optymalizuje wiele standardowych funkcji łańcuchowych C (strlen, strchr, strcpy) i ich odpowiedniki w szybsze alternatywy.
+
+-faggressive-loop-optimizations - opcja nakazuje optymalizatorowi pętli, aby używał ograniczeń języka do określenia limitu liczby iteracji pętli. Zakłada to, że kod pętli nie wywołuje niezdefiniowanego zachowania, powodując przepełnienie liczb całkowitych lub dostęp do tablicy "out-of-boud". Opcja ta jest domyślnie włączona.
+
+-fpredictive-commoning - ponowne wykorzystanie wykonywanych obliczeń (w szczególności ładowań i zapisów pamięci) w poprzednich iteracjach pętli. Opcja jest domyślnie włączona na poziomie -O3.
+
+-fweb - Konstruuje sieci w sposób powszechnie stosowany dla celów alokacji rejestrów i przypisuje każdej sieci indywidualny pseudo rejestr. Pozwala to narzędziu alokującemu rejestry na bezpośrednie operowanie na pseudo, ale także wzmacnia kilka innych narzędzi optymalizacyjnych, takich jak CSE, optymalizator pętli i "trivial dead code remover". Może to jednak uniemożliwić debugowanie, ponieważ zmienne nie pozostają już w "rejestrze domowym".
+
+b) bezpieczeństwo
+-fstack-protector - generuje dodatkowy kod, który sprawdza czy bufory się przepełniają. Odbywa się to poprzez dodanie "strażnika" do funkcji z podatnościami na atak. "Strażnik" dodawany jest np. do funkcji wywołujących "alloc" oraz funkcji z buforami większymi niż 8 bajtów. "Strażnicy" są inicjalizowani na wejściu do funkcji, a następnie sprawdzani przy wyjściu z funkcji. 
+
+-fstack-protector-all - to samo co -fstack-protector, ale działa dla wszystkich funkcji.
+ 
+-fstack-protector-strong - to samo co -fstack-protector, ale działa dodatkowo na funkcje, które mają lokalne definicje tablic lub mają odniesienia do lokalnych adresów ramek
+
+-fstack-protector-explicit - to samo co -fstack-protector, ale chroni jedynie funkcje, które mają zdefiniowany atrybut "stack_protect"
+
+-fstack-clash-protection - generuje dodatkowy kod, który ma na celu zapobiec atakom "stack clash". Kiedy opcja jest włączona, kompilator będzie alokował tylko jedną stronę przestrzeni stosu w danym momencie, a każda strona będzie udostępniona natychmiast po przydziale. Zapobiega to od skakania przydziałom na dowolną, chronioną stronę udostępnioną przez system operacyjny.
+
+
+-ftrapv - generuje pułapki dla przepełnień przy dodawaniu, odejmowaniu i mnożeniu.
+
+-fvtable-verify=[std|preinit|none] - umożliwia sprawdzenie w czasie działania programu każdego wywołania czy wskaźnik vtable przez który następuje wywołanie jest prawidłowy dla typu obiektu i nie został uszkodzony lub nadpisany. Jeśli podczas uruchamiania zostanie wykryty nieprawidłowy wskaźnik tablicy vtable, zostanie zgłosony błąd, a wykonanie programu zostanie wstrzymane.
 
 --- Zadanie 4 ---
 
