@@ -1,0 +1,7 @@
+1. Atari vs Nintendo
+
+Nintendo stworzyło kod blokady 10NES, aby uniemożliwić odtwarzanie nieautoryzowanych kartridży z grami na konsoli Nintendo. Atara próbowało złamać kod poprzez monitorowanie komunikacji między autoryzowanymi chipami gry, a chipami konsoli, a nastepnie poprzz fizyczne zbadanie chipów. Atari używało również kopii 10NES (który otrzymali nielegalnie) do mikroskopowego badania kodu z chipa i opracowało oryginalny program, który nie wykorzystywał żadnego z kodów 10NES, ale spełniał tę samą funkcję.
+
+Sąd uznał, że Atari dopuściło się naruszenie prawa poprzez powielenie kopii 10NES, do której posiadania nie było uprawnienie. Wszelkie próby inżynierii wstecznej, w tym chemiczne usuwanie warstw czy mikroskopowe badania chipa, przepisywanie kodu obiektowego na odręczną listę jedynek i zer, dezasemblacja kodu obiektowego stanowiły uczciwy użytek. Ale każda inżynieria wsteczna, która wykorzystywała kopię wykradzioną z Biura Praw Autorskich była niezgodna z prawem. Wreszcie, program odblokowujący Atari był zasadniczo podobny do 10NES w sposób, który nie był konieczny do odtworzenia funkcji odblokowywania konsoli NES. Nawet jeśli program został napisany dla innego chipa i w innym języku programowania, te podobieństwa sugerowały, że program Atari nie był niezależnym tworem, ale nieautoryzowaną kopią.
+
+2. Sega v. Accolade reverse
