@@ -1,0 +1,18 @@
+ ISO 15408 - norma ta rozwija to, coś co nazywane jest "Common Criteria". Dokument opisuje integrację i testowanie wielu różnych produktów programowych i sprzętowych w bezpieczny sposób.
+ 
+ IEC 62443 - norma IEC 62443 dotyczy cyberbezpieczeństwa i definiuje procesy, techniki i wymagania dla Przemysłowych Systemów Automatyki i Sterowania. Dokumenty te są wynikiem procesu tworzenia norm IEC, w którym wszystkie zaangażowane komitety krajowe uzgadniają wspólną normę.
+ 
+ Norma składa się z 4 kategorii:
+ 1) pierwsza kategoria obejmuje informacje podstawowe, takie jak pojęcia, modele i terminologia.
+ 2) druga kategoria dotyczy różnych aspektów tworzenia i utrzymywania skutecznego programu bezpieczeństwa.
+ 3) trzecia kategoria opisuje wytyczne projektowe systemu i wymagania dotyczące bezpiecznej integracji systemów sterowania.
+ 4) czwarta kategoria obejmuje produkty pracy, które opisują specyficzny rozwój produktu i wymagania techniczne produktów systemu sterowania.
+ 
+ ISO/SAE 21434 - nowy standard bezpieczeństwa cybernetycznego opracowany wspólnie przez grupy robocze ISO i SAE. Proponuje się w nim środki bezpieczeństwa cybernetycznego w cyklu rozwoju pojazdów drogowych. Norma ta jest związana z opracowywanym obecnie rozporządzeniem Unii Europejskiej w sprawie cyberbezpieczeństwa. W koordynacji z UE, Europejska Komisja Gospodarcza opracowuje certyfikat dla "systemu zarządzania bezpieczeństwem cybernetycznym", który ma być obowiązkowy w przypadku homologacji typu pojazdów. ISO/SAE 21434 jest normą techniczną dla rozwoju motoryzacji, która może wykazać zgodność z tymi przepisami.
+ 
+ ETSI EN 303 645 - norma zapewnia zestaw podstawowych wymagań dotyczących bezpieczeństwa w urządzeniach konsumenckich Internetu rzeczy (IoT). Zawiera on techniczne środki kontroli i zasady organizacyjne dla twórców i producentów urządzeń konsumenckich podłączonych do Internetu. Standard został wydany w czerwcu 2020 roku] i ma być uzupełniony o inne, bardziej szczegółowe standardy. Ponieważ wiele konsumenckich urządzeń IoT przetwarza informacje umożliwiające identyfikację osoby, wdrożenie standardu pomaga w spełnieniu wymogów ogólnego rozporządzenia o ochronie danych w UE.
+ 
+ Normy krajowe:
+ Cyber Essentials - Cyber Essentials to rządowy program zapewnienia bezpieczeństwa informacji w Zjednoczonym Królestwie, prowadzony przez Narodowe Centrum Bezpieczeństwa Cybernetycznego. Zachęca organizacje do stosowania dobrych praktyk w zakresie bezpieczeństwa informacji. Cyber Essentials obejmuje również ramy gwarantujące pewność oraz prosty zestaw środków kontroli bezpieczeństwa w celu ochrony informacji przed zagrożeniami pochodzącymi z internetu.
+ 
+ BSI IT-Grundschutz - Standardy Federalnego Urzędu Bezpieczeństwa Informatycznego (Bundesamt für Sicherheit in der Informationstechnik) są elementarnym składnikiem metodyki ochrony podstawowej IT.  Zawierają one zalecenia dotyczące metod, procesów i procedur, jak również podejść i środków dla różnych aspektów bezpieczeństwa informacji. Użytkownicy z organów publicznych i przedsiębiorstw, jak również producenci i dostawcy usług mogą korzystać z norm BSI, aby zwiększyć bezpieczeństwo swoich procesów biznesowych i danych.

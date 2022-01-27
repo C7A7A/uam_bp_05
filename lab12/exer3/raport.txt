@@ -4,4 +4,18 @@ Nintendo stworzyło kod blokady 10NES, aby uniemożliwić odtwarzanie nieautoryz
 
 Sąd uznał, że Atari dopuściło się naruszenie prawa poprzez powielenie kopii 10NES, do której posiadania nie było uprawnienie. Wszelkie próby inżynierii wstecznej, w tym chemiczne usuwanie warstw czy mikroskopowe badania chipa, przepisywanie kodu obiektowego na odręczną listę jedynek i zer, dezasemblacja kodu obiektowego stanowiły uczciwy użytek. Ale każda inżynieria wsteczna, która wykorzystywała kopię wykradzioną z Biura Praw Autorskich była niezgodna z prawem. Wreszcie, program odblokowujący Atari był zasadniczo podobny do 10NES w sposób, który nie był konieczny do odtworzenia funkcji odblokowywania konsoli NES. Nawet jeśli program został napisany dla innego chipa i w innym języku programowania, te podobieństwa sugerowały, że program Atari nie był niezależnym tworem, ale nieautoryzowaną kopią.
 
-2. Sega v. Accolade reverse
+2. Sega vs Accolade
+
+Accolade zakupiło konsolę Segi - Genesis, oraz trzy kartridże z grami. Następnie system został podłączony w taki sposób, że dane można było zbadać przemieszcając się pomiędzy kartridżami, a konsolą podczas gry. Pracownicy Accolade załadowali do konsoli mieszankę własnego kodu i zmodyfikowanego kodu z zakupionych kartridży i testowali go, aż odkryli sposób na odblokowanie konosli Genesis. Po udanym procesie inżynierii wstecznej firma opracowała podręcznik dla deweloperów, w którym opisała wymagania dla gier, aby były kompatybilne z Genesis. Instrukcja nie zawierała kodu z gier Segi, lecz infomracje związane z wymaganiami interfejsu.
+
+Następnie Accolade wykorzystywała podręcznik do tworzenia własnych gier nie konsolę Genesis.
+
+W 1991 Sega rozpoczęła produkcję nowej wersji konsoli Gensis. Pracownicy Accolade ponownie rozpoczęli proces analizowania, w jaki sposób można odblokować nową wersję konsoli.
+
+Sega wniosła pozew o naruszenie praw autorskich przeciwko Accolade za pośrednie kopiowanie podczas procesu inżynierii wstecznej. Sąd przyznał rację Sedze, przede wszystkim dlatego, że działania Accolade spowodowały spadek sprzedaży w Sedze. Ponadto, instniała alternatywna forma kodowania, co czyniło kopiowanie kodu źródłowego zbędnym. Firmie Accolade nakazano wycofanie wszystkich gier stanowiących naruszenie w ciągu 10 dni roboczych. W apelacji Accolade przedstawiło cztery argumenty odnoszące się do zarzutu naruszenia praw autorskich: 
+- kopiowanie pośrednie nie jest naruszeniem, 
+- dezasemblacja kodu obiektowego w celu zrozumienia idei i koncepcji funkcjonalnych jest zgodna z prawem,
+- dezasemblacja jest dozwolona przez zasadę, która zezwala na wczytywanie programów komputerowych do pamięci,
+- dezasemblacja w celu zrozumienia idei i koncepcji funkcjonalnych jest uczciwym użytkiem
+
+Pierwsze trzy argumenty zostały odrzucone przez Sąd, ale czwarty został przyjęty i rozwiązał postanowienie Sądu Okręgowego. Sąd stwierdził, że jeśli inżynieria wsteczna umożliwia dostęp do tej części kodu źródłowego, która nie jest objęta ochroną prawa autorskiego, to nie dochodzi do naruszenia, jeśli istnieje uzasadniony powód takiego kopiowania.
