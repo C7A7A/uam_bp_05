@@ -1,6 +1,6 @@
 # UAM_BP
 
-UAM semestr 5 - Bezpieczne Programowanie
+semestr 5 UAM - Bezpieczne Programowanie
 
 ## Getting started
 
